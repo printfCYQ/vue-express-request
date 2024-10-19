@@ -1,4 +1,4 @@
-export const baseUrl = 'https://38955ydg-77jr24nn-yfmndixlty9k.vcc6.mcprev.cn'
+export const baseUrl = 'http://localhost:3000'
 export const testGetUrl = '/mock/testGet'
 export const testPostUrl = '/mock/testPost'
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { io } from 'socket.io-client';
-import { baseUrl, socketUrl } from '../../url'
+import { io } from "socket.io-client";
+import { onMounted, onUnmounted, ref } from "vue";
+import { baseUrl, socketUrl } from "../../url";
 const clientMessages = ref<number[]>([]);
 const serverMessages = ref<number[]>([]);
 const socket = ref();
@@ -9,29 +9,29 @@ const socket = ref();
 const sendMessage = () => {
   const message = new Date().getTime();
   clientMessages.value.push(message);
-  socket.value.emit('message', message);
+  socket.value.emit("message", message);
 };
 
 onMounted(() => {
   socket.value = io(baseUrl, {
-    path: socketUrl
+    path: socketUrl,
   });
 
-  socket.value.on('message', (msg: number) => {
+  socket.value.on("message", (msg: number) => {
     serverMessages.value.push(msg);
   });
 });
 
 onUnmounted(() => {
-  socket.value.off('message');
+  socket.value.off("message");
+  socket.value.close();
 });
-
 </script>
 
 <template>
-  <h1>fetch/Get</h1>
+  <h1>scoket/Example</h1>
   <button @click="sendMessage">sendMessage</button>
-  <hr>
+  <hr />
   <div class="message-content">
     <div class="item">
       clientMessages：
@@ -46,7 +46,6 @@ onUnmounted(() => {
       </div>
     </div>
   </div>
-
 </template>
 <style>
 .message-content {

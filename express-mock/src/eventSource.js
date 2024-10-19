@@ -24,6 +24,9 @@ router.get('/sse', (req, res) => {
             res.end();
         }
     }, 100);
+    req.socket.on('close', () => {
+        clearInterval(timer);
+    });
 });
 
 router.get('/events', (req, res) => {
@@ -39,7 +42,7 @@ router.get('/events', (req, res) => {
     // 示例：每隔5秒发送一次事件
     const intervalId = setInterval(() => {
         sendEvent({ message: 'Hello, world!', timestamp: new Date().toISOString() });
-    }, 5000);
+    }, 1000);
 
     // 处理客户端连接关闭
     req.on('close', () => {

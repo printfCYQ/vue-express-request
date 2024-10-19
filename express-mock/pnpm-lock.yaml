@@ -1,10 +1,9 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
+  cors:
+    specifier: ^2.8.5
+    version: 2.8.5
   express:
     specifier: ^4.19.2
     version: 4.19.2
@@ -816,3 +815,7 @@ packages:
       utf-8-validate:
         optional: true
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

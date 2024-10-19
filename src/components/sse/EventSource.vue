@@ -1,31 +1,32 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { baseUrl, sseEventSourceUrl } from '../../url'
+import { onMounted, ref } from "vue";
+import { baseUrl, sseEventSourceUrl } from "../../url";
 
-const text = ref('')
+const textList = ref<Array<string>>([]);
 
 const eventSource = ref<EventSource>();
 
 onMounted(async () => {
-    console.log('object');
-    eventSource.value = new EventSource(baseUrl + sseEventSourceUrl);
-    console.log(eventSource.value)
-    eventSource.value.onmessage = function (event) {
-        const data = JSON.parse(event.data);
-        text.value += `Message: ${data.message}, Timestamp: ${data.timestamp}`;
-    };
+  eventSource.value = new EventSource(baseUrl + sseEventSourceUrl);
+  eventSource.value.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    textList.value.push(
+      `Message: ${data.message}, Timestamp: ${data.timestamp}`
+    );
+  };
 
-    eventSource.value.onerror = function (error) {
-        console.log('EventSource failed: ', error);
-    };
+  eventSource.value.onerror = function (error) {
+    console.log("EventSource failed: ", error);
+  };
 });
-
 </script>
 
 <template>
-    <div>
-        {{ text }}
-    </div>
+  <h1>sse/EventSource</h1>
+  <hr />
+  <div v-for="item in textList" :key="item">
+    {{ item }}
+  </div>
 </template>
 
 

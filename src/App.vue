@@ -1,38 +1,43 @@
 <script setup lang="ts">
-import FetchGet from './components/fetch/Get.vue';
-import FetchPost from './components/fetch/Post.vue';
-import AxiosGet from './components/axios/Get.vue';
-import AxiosPost from './components/axios/Post.vue';
-import ScoketExample from './components/scoket/Example.vue';
-import SseFetch from './components/sse/Fetch.vue';
-import SseEventSource from './components/sse/EventSource.vue';
+import AxiosGet from "./components/axios/Get.vue";
+import AxiosPost from "./components/axios/Post.vue";
+import FetchGet from "./components/fetch/Get.vue";
+import FetchPost from "./components/fetch/Post.vue";
+import ScoketExample from "./components/scoket/Example.vue";
+import SseEventSource from "./components/sse/EventSource.vue";
+import SseFetch from "./components/sse/Fetch.vue";
 
-import { ref, markRaw } from 'vue';
+import { markRaw, ref } from "vue";
 type ListItem = {
-  name: string,
-  com: any
-}
+  name: string;
+  com: any;
+};
 const list: Array<ListItem> = [
-  { name: 'fetch-get', com: FetchGet },
-  { name: 'fetch-post', com: FetchPost },
-  { name: 'axios-get', com: AxiosGet },
-  { name: 'axios-post', com: AxiosPost },
-  { name: 'scoket-example', com: ScoketExample },
-  { name:'sse-fetch', com: SseFetch },
-  { name:'sse-eventSource', com: SseEventSource },
-]
+  { name: "fetch-get", com: FetchGet },
+  { name: "fetch-post", com: FetchPost },
+  { name: "axios-get", com: AxiosGet },
+  { name: "axios-post", com: AxiosPost },
+  { name: "scoket-example", com: ScoketExample },
+  { name: "sse-fetch", com: SseFetch },
+  { name: "sse-eventSource", com: SseEventSource },
+];
 
-const componentIs = ref(markRaw(FetchGet))
+const componentIs = ref(markRaw(FetchGet));
 
 const handleClickNav = (item: ListItem) => {
-  componentIs.value = markRaw(item.com)
-}
+  componentIs.value = markRaw(item.com);
+};
 </script>
 
 <template>
   <div class="container">
     <div class="nav">
-      <div class="nav-item" v-for="item in list" :key="item.name" @click="handleClickNav(item)">
+      <div
+        class="nav-item"
+        v-for="item in list"
+        :key="item.name"
+        @click="handleClickNav(item)"
+      >
         {{ item.name }}
       </div>
     </div>

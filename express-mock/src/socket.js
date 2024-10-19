@@ -2,7 +2,10 @@ const { Server } = require('socket.io');
 
 function initializeSocket(server) {
     const io = new Server(server, {
-        path: '/mock/socket'
+        path: '/mock/socket',
+        cors: {
+            origin: '*',
+        },
     });
 
     io.on('connection', (socket) => {
